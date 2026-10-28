@@ -1,0 +1,6 @@
+node_modules/
+private/
+output/
+*.pem
+*.key
+*.enc.json

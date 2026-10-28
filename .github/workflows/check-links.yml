@@ -1,0 +1,35 @@
+name: Check official Microsoft downloads
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: manual-official-download-check
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout public tool only
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Use Node.js 24
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+      - name: Run offline contract tests
+        run: npm test
+      - name: Check exact official media
+        env:
+          RECIPIENT_PUBLIC_KEY: ${{ vars.RECIPIENT_PUBLIC_KEY }}
+        run: node cli.mjs acquire targets.json env output/results.enc.json
+      - name: Retain encrypted results only
+        if: ${{ always() && hashFiles('output/results.enc.json') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: encrypted-download-results
+          path: output/results.enc.json
+          retention-days: 1
+          if-no-files-found: error

@@ -1,0 +1,14 @@
+[
+  {"id":"win11-26h2-x64","productEditionId":3813,"skuId":27157,"fileName":"Windows11_Client_x64_zh-cn_26300_9457.iso","sizeBytes":9112440832,"officialPage":"https://www.microsoft.com/zh-cn/software-download/windows11"},
+  {"id":"win11-26h2-home-cn-x64","productEditionId":3814,"skuId":27159,"fileName":"Windows11_ChinaOnly_x64_zh-cn_26300_9457.iso","sizeBytes":8615434240,"officialPage":"https://www.microsoft.com/zh-cn/software-download/windows11"},
+  {"id":"win11-26h2-pro-cn-x64","productEditionId":3815,"skuId":27161,"fileName":"Windows11_ChinaOnly_professional_x64_zh-cn_26300_9457.iso","sizeBytes":8825178112,"officialPage":"https://www.microsoft.com/zh-cn/software-download/windows11"},
+  {"id":"win11-26h2-arm64","productEditionId":3816,"skuId":27198,"fileName":"Windows11_Client_arm64_zh-cn_26300_9457.iso","sizeBytes":8852006912,"officialPage":"https://www.microsoft.com/zh-cn/software-download/windows11arm64"},
+  {"id":"win11-26h2-home-cn-arm64","productEditionId":3810,"skuId":27119,"fileName":"Windows11_ChinaOnly_arm64_zh-cn_26300_9457.iso","sizeBytes":8560836608,"officialPage":"https://www.microsoft.com/zh-cn/software-download/windows11arm64"},
+  {"id":"win11-26h2-pro-cn-arm64","productEditionId":3812,"skuId":27121,"fileName":"Windows11_ChinaOnly_arm64_professional_zh-cn_26300_9457.iso","sizeBytes":8699844608,"officialPage":"https://www.microsoft.com/zh-cn/software-download/windows11arm64"},
+  {"id":"win11-25h2-v2-x64","productEditionId":3321,"skuId":20040,"fileName":"Win11_25H2_Chinese_Simplified_x64_v2.iso","sizeBytes":8543608832,"officialPage":"https://www.microsoft.com/zh-cn/software-download/windows11"},
+  {"id":"win11-25h2-v2-home-cn-x64","productEditionId":3322,"skuId":20038,"fileName":"Win11_25H2_China_GGK_Chinese_Simplified_x64_v2.iso","sizeBytes":8075730944,"officialPage":"https://www.microsoft.com/zh-cn/software-download/windows11"},
+  {"id":"win11-25h2-v2-pro-cn-x64","productEditionId":3323,"skuId":20039,"fileName":"Win11_25H2_Pro_Chinese_Simplified_x64_v2.iso","sizeBytes":8280907776,"officialPage":"https://www.microsoft.com/zh-cn/software-download/windows11"},
+  {"id":"win11-25h2-v2-arm64","productEditionId":3324,"skuId":20080,"fileName":"Win11_25H2_Chinese_Simplified_Arm64_v2.iso","sizeBytes":8315279360,"officialPage":"https://www.microsoft.com/zh-cn/software-download/windows11arm64"},
+  {"id":"win11-25h2-v2-home-cn-arm64","productEditionId":3325,"skuId":20078,"fileName":"Win11_25H2_China_GGK_Chinese_Simplified_Arm64_v2.iso","sizeBytes":8055111680,"officialPage":"https://www.microsoft.com/zh-cn/software-download/windows11arm64"},
+  {"id":"win11-25h2-v2-pro-cn-arm64","productEditionId":3326,"skuId":20079,"fileName":"Win11_25H2_Pro_Chinese_Simplified_Arm64_v2.iso","sizeBytes":8188235776,"officialPage":"https://www.microsoft.com/zh-cn/software-download/windows11arm64"}
+]
