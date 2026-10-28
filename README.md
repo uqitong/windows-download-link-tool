@@ -35,6 +35,12 @@ runner. Results use a random AES-256-GCM key wrapped with RSA-OAEP-SHA256 and ar
 uploaded as an encrypted artifact retained for one day. Logs contain only IDs,
 status codes, filenames, sizes, and expiration times, never signed URLs.
 
+The optional `target_ids` workflow input (or local `TARGET_IDS` environment
+variable) selects an exact comma-separated subset of the checked-in manifest.
+It cannot add URLs or arbitrary products. Use it to avoid requesting links that
+are already healthy. Explicit rejections stop the current item's attempt;
+there are no automatic request retries or runner/egress rotation.
+
 Exit status is nonzero when any requested item fails. Verified partial results
 are still encrypted so a consumer can recover individual downloads. A consumer
 must independently validate the exact expected media identity, expiry and Range

@@ -1,6 +1,11 @@
 name: Check official Microsoft downloads
 on:
   workflow_dispatch:
+    inputs:
+      target_ids:
+        description: 'Optional comma-separated IDs from targets.json (blank checks all)'
+        type: string
+        required: false
 permissions:
   contents: read
 concurrency:
@@ -24,6 +29,7 @@ jobs:
       - name: Check exact official media
         env:
           RECIPIENT_PUBLIC_KEY: ${{ vars.RECIPIENT_PUBLIC_KEY }}
+          TARGET_IDS: ${{ inputs.target_ids }}
         run: node cli.mjs acquire targets.json env output/results.enc.json
       - name: Retain encrypted results only
         if: ${{ always() && hashFiles('output/results.enc.json') != '' }}
