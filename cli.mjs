@@ -2,6 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { generateKeyPairSync, createPublicKey } from 'node:crypto';
 import { acquireTarget, safeError, seal, unseal, selectTargets } from './lib/link-tool.mjs';
+import { buildSourceContext } from './lib/context.mjs';
 
 async function writeNew(file, data) {
   await mkdir(dirname(file), { recursive: true });
@@ -26,11 +27,14 @@ async function main() {
     return;
   }
   if (command === 'acquire' && args.length === 3) {
-    const targets = selectTargets(JSON.parse(await readFile(args[0], 'utf8')), process.env.TARGET_IDS ?? '');
+    const manifestBytes = await readFile(args[0]);
+    const targets = selectTargets(JSON.parse(manifestBytes.toString('utf8')), process.env.TARGET_IDS ?? '');
+    const source = buildSourceContext({ manifestBytes, targets });
     const publicKey = args[1] === 'env' ? process.env.RECIPIENT_PUBLIC_KEY : await readFile(args[1], 'utf8');
     const parsedKey = createPublicKey(publicKey);
     if (parsedKey.asymmetricKeyType !== 'rsa' || parsedKey.asymmetricKeyDetails.modulusLength < 3072) throw new Error('Invalid recipient key');
-    const result = { version: 1, checkedAt: new Date().toISOString(), records: [], failures: [] };
+    const result = { version: source ? 2 : 1, ...(source ? { source } : {}),
+      checkedAt: new Date().toISOString(), records: [], failures: [] };
     for (const target of targets) {
       try {
         const record = await acquireTarget(target);

@@ -1,5 +1,8 @@
 name: Check official Microsoft downloads
 on:
+  schedule:
+    # UTC 05:23/17:23, which is 13:23/01:23 in Asia/Shanghai.
+    - cron: '23 5,17 * * *'
   workflow_dispatch:
     inputs:
       target_ids:
@@ -9,7 +12,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: manual-official-download-check
+  group: official-download-check
   cancel-in-progress: false
 jobs:
   check:
@@ -30,12 +33,18 @@ jobs:
         env:
           RECIPIENT_PUBLIC_KEY: ${{ vars.RECIPIENT_PUBLIC_KEY }}
           TARGET_IDS: ${{ inputs.target_ids }}
+          SOURCE_REPOSITORY: ${{ github.repository }}
+          SOURCE_WORKFLOW: check-links.yml
+          SOURCE_REF: ${{ github.ref }}
+          SOURCE_SHA: ${{ github.sha }}
+          SOURCE_RUN_ID: ${{ github.run_id }}
+          SOURCE_RUN_ATTEMPT: ${{ github.run_attempt }}
         run: node cli.mjs acquire targets.json env output/results.enc.json
       - name: Retain encrypted results only
         if: ${{ always() && hashFiles('output/results.enc.json') != '' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: encrypted-download-results
+          name: encrypted-download-results-${{ github.run_id }}-${{ github.run_attempt }}
           path: output/results.enc.json
           retention-days: 1
           if-no-files-found: error
